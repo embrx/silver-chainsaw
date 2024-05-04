@@ -1,29 +1,32 @@
-use rand::seq::SliceRandom; // For random sampling
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
+mod calc;
+mod filereader;
 
-fn calculate_distance(node1: (f64, f64), node2: (f64, f64)) -> f64 {
-    let dx = node1.0 - node2.0;
-    let dy = node1.1 - node2.1;
-    (dx * dx + dy * dy).sqrt()
-}
+use calc::calculate_average_distance;
+use filereader::read_nodes;
+use rand::thread_rng;
+use rand::prelude::SliceRandom;
 
-fn read_nodes(roadNet-CA.txt: &str) -> io::Result<Vec<(f64, f64)>> {
-    let path = Path::new(file_path);
-    let file = File::open(path)?;
-    let reader = io::BufReader::new(file);
-    
-    let mut nodes: Vec<(f64, f64)> = Vec::new();
-    
-    for line in reader.lines() {
-        let line = line?;
-        let coordinates: Vec<&str> = line.split_whitespace().collect();
-        if coordinates.len() == 2 {
-            let x = coordinates[0].parse::<f64>().unwrap();
-            let y = coordinates[1].parse::<f64>().unwrap();
-            nodes.push((x, y));
-        }
-    }
-    Ok(nodes)
+fn main() {
+    // Specify the file path
+    let file_path = "roadNet-CA.txt";
+
+    // Read nodes from file
+    let nodes_set = read_nodes("roadNet-CA.txt");
+    let nodes_vec: Vec<(f64, f64)> = nodes_set.into_iter().collect();
+
+    // Define the sample size (choose a reasonable sample size)
+    let sample_size = (nodes_vec.len() as f64 * 0.1) as usize; // 10% of nodes, for example
+
+    // Randomly sample the nodes
+    let mut rng = thread_rng();
+    let sample: Vec<&(f64, f64)> = nodes_vec
+        .choose_multiple(&mut rng, sample_size)
+        .cloned()
+        .collect();
+
+    // Calculate average distance
+    let average_distance = calculate_average_distance(&sample, &nodes_vec);
+
+    // Print the average distance
+    println!("Average distance: {:.4}", average_distance);
 }

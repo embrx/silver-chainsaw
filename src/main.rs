@@ -16,7 +16,7 @@ fn main() {
             println!("Data parsed successfully.");
             let elapsed = start_time.elapsed();
             println!("Time taken to parse data: {:.2?}", elapsed);
-            let sample_size = 10; // adjust sample size here
+            let sample_size = 1000; // adjust sample size here
             println!("Getting a random sample...");
             let sample = random_sample(&nodes, sample_size);
             println!("Sample obtained.");

@@ -11,7 +11,6 @@ pub fn average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec
     for &(node1, node2) in sample {
         let distances = bfs(node1, adjacency_list);
         let distances2 = bfs(node2, adjacency_list);
-
         total_distance += distances.values().sum::<i32>() as f64;
         total_distance += distances2.values().sum::<i32>() as f64;
         total_pairs += distances.len() - 1;

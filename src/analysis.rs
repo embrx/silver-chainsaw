@@ -15,8 +15,8 @@ pub fn average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec
 
         total_distance += distances.values().sum::<i32>() as f64;
         total_distance += distances2.values().sum::<i32>() as f64;
-        total_pairs += distances.len() - 1; // Exclude distance to itself
-        total_pairs += distances2.len() - 1; // Exclude distance to itself
+        total_pairs += distances.len() - 1;
+        total_pairs += distances2.len() - 1;
     }
 
     if total_pairs == 0 {

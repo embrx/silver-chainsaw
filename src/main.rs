@@ -11,8 +11,7 @@ fn main() {
 
     println!("Starting the program...");
 
-    // Reading the file and parsing data
-    let start_time = Instant::now();
+    let start_time = Instant::now(); // reading and parsing data
     println!("Reading the file and parsing data...");
     
     match read_file_and_parse_data(filename) {
@@ -21,24 +20,20 @@ fn main() {
             let elapsed = start_time.elapsed();
             println!("Time taken to parse data: {:.2?}", elapsed);
 
-            let sample_size = 10;
-            // Random sample of nodes
+            let sample_size = 10; // adjust sample size here
             println!("Getting a random sample of nodes (edges)...");
-            let sample = get_random_sample(&adjacency_list, sample_size);
+            let sample = random_sample(&adjacency_list, sample_size);
             println!("Sample obtained.");
 
-            // Calculate the number of unique nodes in the sample
-            let num_unique_nodes = calculate_unique_nodes_in_sample(&sample);
+            let num_unique_nodes = unique_nodes(&sample); // calculate unique nodes
 
-            // Calculating average distance
-            println!("Calculating average distance...");
-            let average_distance = calculate_average_distance(&sample, &adjacency_list);
+            println!("Calculating average distance..."); // average distance
+            let average_distance = average_distance(&sample, &adjacency_list);
             println!("Average distance calculated.");
             
-            // Printing results
-            println!("Sample size: {}", sample.len());
+            println!("Sample size: {}", sample.len()); // printing results
             println!("First 20 lines of the random sample:");
-            let display_limit = sample.len().min(20); // Only show the first 20 lines if available
+            let display_limit = sample.len().min(20); // only shows first 20
             let display_sample = &sample[..display_limit];
             println!("{:?}", display_sample);
             println!("Number of unique nodes in sample: {}", num_unique_nodes);

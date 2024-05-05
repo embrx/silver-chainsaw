@@ -39,6 +39,10 @@ fn main() {
             
             // Step 4: Print results
             println!("Sample size: {}", sample.len());
+            println!("First 20 lines of the random sample:");
+            let display_limit = sample.len().min(20); // Only show the first 20 lines if available
+            let display_sample = &sample[..display_limit];
+            println!("{:?}", display_sample);
             println!("Number of unique nodes in sample: {}", num_unique_nodes);
             println!("Average distance between nodes: {:.2}", average_distance);
         }

@@ -1,4 +1,4 @@
-use roads::{read_and_parse, analysis::{average_distance, random_sample, unique_nodes}};
+use roads::{read_and_parse, analysis::{average_distance, random_sample, unique_nodes, clustering_coefficient}};
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::Write;
@@ -51,4 +51,23 @@ fn test_average_distance() {
     let avg_dist = average_distance(&sample, &nodes);
 
     assert_eq!(avg_dist, (1 + 1 + 1) as f64 / 3.0);
+}
+
+fn test_clustering_coefficient() {
+    let mut nodes: HashMap<i32, Vec<i32>> = HashMap::new();
+    
+    nodes.insert(1, vec![2, 3]);
+    nodes.insert(2, vec![1, 3]);
+    nodes.insert(3, vec![1, 2]);
+    
+    let cl_coefficient = clustering_coefficient(&nodes);
+    
+    assert!((cl_coefficient - 1.0).abs() < f64::EPSILON, "Expected 1.0 but got {}", cl_coefficient);
+    
+    nodes.clear();
+    nodes.insert(1, vec![2]);
+    nodes.insert(2, vec![1, 3]);
+    nodes    
+    let cl_coefficient = clustering_coefficient(&nodes);
+    assert!((cl_coefficient - 0.0).abs() < f64::EPSILON, "Expected 0.0 but got {}", cl_coefficient);
 }

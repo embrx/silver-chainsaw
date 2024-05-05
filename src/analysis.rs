@@ -1,8 +1,8 @@
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap};
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
-use crate::util::bfs;
+use crate::utilize::bfs;
 
 pub fn calculate_average_distance(sample: &[i32], adjacency_list: &HashMap<i32, Vec<i32>>) -> f64 {
     let mut total_distance = 0.0;

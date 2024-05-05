@@ -1,6 +1,6 @@
 mod data_parsing;
 mod analysis;
-mod util;
+mod utilize;
 
 use data_parsing::read_file_and_parse_data;
 use analysis::{calculate_average_distance, get_random_sample};

@@ -44,6 +44,5 @@ pub fn unique_nodes(sample: &[(i32, i32)]) -> usize {
         unique_nodes_set.insert(node1);
         unique_nodes_set.insert(node2);
     }
-
     unique_nodes_set.len()
 }

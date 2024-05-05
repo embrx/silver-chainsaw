@@ -19,6 +19,5 @@ pub fn bfs(start_node: i32, adjacency_list: &HashMap<i32, Vec<i32>>) -> HashMap<
             }
         }
     }
-
     distances
 }

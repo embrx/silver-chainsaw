@@ -16,6 +16,5 @@ pub fn read_and_parse(filename: &str) -> Result<HashMap<i32, Vec<i32>>> {
         nodes.entry(node1).or_insert_with(Vec::new).push(node2);
         nodes.entry(node2).or_insert_with(Vec::new).push(node1);
     }
-    
-    Ok(adjacency_list)
+    Ok(nodes)
 }

@@ -1,11 +1,9 @@
-// main.rs
-
 mod data_parsing;
 mod analysis;
 mod utilize;
 
-use data_parsing::read_file_and_parse_data;
-use analysis::{calculate_average_distance, get_random_sample, calculate_unique_nodes_in_sample};
+use data_parsing::read_and_parse;
+use analysis::{average_distance, random_sample, unique_nodes};
 use std::time::Instant;
 
 fn main() {
@@ -13,7 +11,7 @@ fn main() {
 
     println!("Starting the program...");
 
-    // Step 1: Read the file and parse data
+    // Reading the file and parsing data
     let start_time = Instant::now();
     println!("Reading the file and parsing data...");
     
@@ -24,7 +22,7 @@ fn main() {
             println!("Time taken to parse data: {:.2?}", elapsed);
 
             let sample_size = 10;
-            // Step 2: Get a random sample of nodes (pairs of nodes)
+            // Random sample of nodes
             println!("Getting a random sample of nodes (edges)...");
             let sample = get_random_sample(&adjacency_list, sample_size);
             println!("Sample obtained.");
@@ -32,12 +30,12 @@ fn main() {
             // Calculate the number of unique nodes in the sample
             let num_unique_nodes = calculate_unique_nodes_in_sample(&sample);
 
-            // Step 3: Calculate average distance
+            // Calculating average distance
             println!("Calculating average distance...");
             let average_distance = calculate_average_distance(&sample, &adjacency_list);
             println!("Average distance calculated.");
             
-            // Step 4: Print results
+            // Printing results
             println!("Sample size: {}", sample.len());
             println!("First 20 lines of the random sample:");
             let display_limit = sample.len().min(20); // Only show the first 20 lines if available

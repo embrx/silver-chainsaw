@@ -1,5 +1,3 @@
-// analysis.rs
-
 use std::collections::HashMap;
 use std::collections::HashSet;
 use rand::seq::SliceRandom;
@@ -7,7 +5,7 @@ use rand::thread_rng;
 
 use crate::utilize::bfs;
 
-pub fn calculate_average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec<i32>>) -> f64 {
+pub fn average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec<i32>>) -> f64 {
     let mut total_distance = 0.0;
     let mut total_pairs = 0;
 
@@ -28,7 +26,7 @@ pub fn calculate_average_distance(sample: &[(i32, i32)], adjacency_list: &HashMa
     total_distance / total_pairs as f64
 }
 
-pub fn get_random_sample(adjacency_list: &HashMap<i32, Vec<i32>>, sample_size: usize) -> Vec<(i32, i32)> {
+pub fn random_sample(adjacency_list: &HashMap<i32, Vec<i32>>, sample_size: usize) -> Vec<(i32, i32)> {
     let unique_edges: Vec<(i32, i32)> = adjacency_list.iter()
         .flat_map(|(&node1, neighbors)| neighbors.iter().map(move |&node2| (node1, node2)))
         .collect();
@@ -39,7 +37,7 @@ pub fn get_random_sample(adjacency_list: &HashMap<i32, Vec<i32>>, sample_size: u
     sample
 }
 
-pub fn calculate_unique_nodes_in_sample(sample: &[(i32, i32)]) -> usize {
+pub fn unique_nodes(sample: &[(i32, i32)]) -> usize {
     let mut unique_nodes_set = HashSet::new();
 
     for &(node1, node2) in sample {

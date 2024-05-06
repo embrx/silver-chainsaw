@@ -1,16 +1,16 @@
-use std::collections::HashMap;
+use std::collections::HashMap; // methods
 use std::collections::HashSet;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
 use crate::utilize::bfs;
 
-pub fn average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec<i32>>) -> f64 {
+pub fn average_distance(sample: &[(i32, i32)], nodes: &HashMap<i32, Vec<i32>>) -> f64 {
     let mut total_distance = 0.0;
     let mut total_pairs = 0;
-    for &(node1, node2) in sample {
-        let distances = bfs(node1, adjacency_list);
-        let distances2 = bfs(node2, adjacency_list);
+    for &(node1, node2) in sample { // distance formula
+        let distances = bfs(node1, nodes);
+        let distances2 = bfs(node2, nodes);
         total_distance += distances.values().sum::<i32>() as f64;
         total_distance += distances2.values().sum::<i32>() as f64;
         total_pairs += distances.len() - 1;
@@ -22,8 +22,8 @@ pub fn average_distance(sample: &[(i32, i32)], adjacency_list: &HashMap<i32, Vec
     total_distance / total_pairs as f64
 }
 
-pub fn random_sample(adjacency_list: &HashMap<i32, Vec<i32>>, sample_size: usize) -> Vec<(i32, i32)> {
-    let unique_edges: Vec<(i32, i32)> = adjacency_list.iter()
+pub fn random_sample(nodes: &HashMap<i32, Vec<i32>>, sample_size: usize) -> Vec<(i32, i32)> {
+    let unique_edges: Vec<(i32, i32)> = nodes.iter()
         .flat_map(|(&node1, neighbors)| neighbors.iter().map(move |&node2| (node1, node2)))
         .collect();
     let mut rng = thread_rng();
